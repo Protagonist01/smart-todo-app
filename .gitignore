@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*$py.class
+.Python
+env/
+venv/
+ENV/
+build/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+
+# Project specific
+data/*.json
+!data/.gitkeep
+
+# Poetry
+poetry.lock
