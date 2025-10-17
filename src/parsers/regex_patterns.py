@@ -38,7 +38,7 @@ TIME_PATTERN = r'(?:at|by)\s+(\d{1,2})(?::(\d{2}))?\s*(am|pm|AM|PM)?'
 
 # Matches duration like "1h", "30m", "2h30m"
 # Example: "1h30m" -> captures "1h30m"
-DURATION_PATTERN = r'(\d+h)?(\d+m)?'
+DURATION_PATTERN =  r'\b\d+h\d*m?\b|\b\d+m\b'
 
 
 # Pre-compile patterns for faster matching
