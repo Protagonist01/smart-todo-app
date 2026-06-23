@@ -1,144 +1,94 @@
-# Smart Todo Application
+# ⚡ Smart Todo Application
 
-A powerful command-line todo application with natural language parsing, built with Python. Parse tasks like "Buy milk @shopping #high due:tomorrow" and the app intelligently extracts all components.
+[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
+[![Dependency Manager](https://img.shields.io/badge/poetry-managed-blueviolet?style=for-the-badge&logo=poetry&logoColor=white)](https://python-poetry.org)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://github.com/psf/black)
+[![Testing](https://img.shields.io/badge/tests-pytest-green?style=for-the-badge&logo=pytest&logoColor=white)](https://docs.pytest.org)
+[![License](https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge)](LICENSE)
 
-## Features
+A powerful, keyboard-centric command-line todo application with advanced natural language parsing, built using Python. Intelligently parses complex entries like `"Buy milk @shopping #high due:tomorrow at 5pm"` and extracts all attributes instantly.
 
-### Core Functionality
-- ✅ **Natural Language Parsing** - Add tasks using everyday language
-- 🏷️ **Smart Tag System** - Organize with `@work`, `@shopping`, `@personal`
-- ⚡ **Priority Levels** - Set importance with `#high`, `#medium`, `#low`
-- 📅 **Flexible Dates** - Use exact dates or relative terms like "tomorrow", "next week"
-- 👤 **Task Assignment** - Assign tasks via email addresses
-- ⏰ **Time Support** - Specify times in 12/24 hour format
-- 💾 **Auto-Save** - All changes automatically persist to JSON
-- 🔍 **Powerful Search** - Find tasks by keyword, tag, priority, or status
-- 📊 **Statistics** - Track completion rates and task metrics
+---
 
-### Technical Features
-- Regex-based intelligent parsing
-- Comprehensive validation system
-- Persistent JSON storage
-- Modular architecture
-- 200+ unit tests
-- >95% code coverage
+## ✨ Features
 
-## Installation
+### 🧠 Intelligent Natural Language Parser
+*   **Relative & Absolute Dates**: Recognizes specific dates (`due:2025-10-20`), relative dates (`due:today`, `due:tomorrow`), and offsets (`due:3 days`, `due:2 weeks`).
+*   **Contextual Tags**: Organize tasks using custom tags (`@work`, `@shopping`, `@personal`).
+*   **Priority Levels**: Elevate key tasks using `#high`, `#medium`, and `#low` priorities.
+*   **Task Assignment**: Direct tasks to owners using email formats (e.g. `assigned:john@example.com`).
+*   **Precise Time Support**: Schedule down to the minute with 12/24 hour expressions (`at 3pm`, `by 17:00`).
+
+### 💻 Terminal UI & Experience
+*   **Dynamic Command Prompt**: A clean shell interface with descriptive prompts, headers, and color conventions.
+*   **Partial ID Completion**: Reference tasks by the first few characters of their unique hex IDs (e.g. `complete a1b2`).
+*   **Detailed Analytics**: Run `stats` to review completion rates, totals, and overdue counters.
+*   **Regex-driven Validation**: Immediate user-friendly feedback on malformed input data.
+
+### ⚙️ Under the Hood
+*   **Auto-Save & Atomic Persistence**: All actions write straight to a secure local `tasks.json` file.
+*   **Extensive Test Coverage**: Backed by a suite of **200+ unit and integration tests** ensuring `>95%` code coverage.
+
+---
+
+## 📝 NLP Format Syntax
+
+| Attribute | Format / Keyword | Examples | Notes |
+| :--- | :--- | :--- | :--- |
+| **Tags** | `@tagname` | `@work`, `@shopping` | Case-insensitive, alphanumeric + underscores |
+| **Priority** | `#level` | `#high`, `#medium`, `#low` | Controls ordering and priority filters |
+| **Due Date** | `due:<value>` | `due:tomorrow`, `due:2025-10-20` | Supports relative keywords and offsets (e.g. `3 days`) |
+| **Time** | `at <time>` or `by <time>` | `at 3pm`, `by 14:00` | Supports both 12-hour (am/pm) and 24-hour formats |
+| **Assignment** | `assigned:<email>` | `assigned:alice@example.com` | Strictly validates email structure |
+| **Duration** | `<number><h\|m>` | `1h`, `30m`, `1h30m` | Tracks projected time expenditure |
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.10 or higher
-- Poetry (dependency management)
+*   **Python 3.10+**
+*   **Poetry** (Python package manager)
 
-### Setup
+### Setup & Run
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR-USERNAME/smart-todo-app.git
+# 1. Clone the repository
+git clone https://github.com/Protagonist01/smart-todo-app.git
 cd smart-todo-app
 
-# Install dependencies with Poetry
+# 2. Install dependencies
 poetry install
 
-# Run the application
+# 3. Launch the application
 poetry run python -m src.main
 ```
 
-## Usage
+---
 
-### Starting the Application
-```bash
-poetry run python -m src.main
-```
+## 📸 Visual Walkthrough
 
-### Available Commands
+<details>
+<summary>🖼️ Click to expand screenshot gallery</summary>
 
-#### Adding Tasks
-```bash
-# Simple task
-> add Buy milk
+| Welcome Screen | Adding a Task |
+|:---:|:---:|
+| ![Welcome Screen](screenshots/1-welcome.png) | ![Add Task](screenshots/2-add-task.png) |
+| **Listing Tasks** | **Filtering by Tag** |
+| ![List Tasks](screenshots/3-list-tasks.png) | ![Filter by Tag](screenshots/4-filter-tag.png) |
+| **Statistics Dashboard** | **Help Menu** |
+| ![Statistics](screenshots/5-stats.png) | ![Help Menu](screenshots/6-help.png) |
+| **Search Functionality** | **Exit Application** |
+| ![Search](screenshots/7-search.png) | ![Exit](screenshots/8-exit.png) |
 
-# Task with tags
-> add Buy milk @shopping @urgent
+</details>
 
-# Task with priority
-> add Complete report #high
+---
 
-# Task with due date (exact)
-> add Submit assignment due:2025-10-20
+## 💬 Example CLI Session
 
-# Task with due date (relative)
-> add Call client due:tomorrow
-> add Review PR due:next week
+Below is an example of an interactive session with the Smart Todo application:
 
-# Task with time
-> add Team meeting at 3pm @work
-
-# Task with assignment
-> add Review code assigned:alice@example.com
-
-# Complete task with all features
-> add Buy groceries @shopping #high due:tomorrow at 5pm assigned:john@example.com
-```
-
-#### Listing Tasks
-```bash
-# List all tasks
-> list
-
-# List incomplete tasks only
-> list incomplete
-
-# List complete tasks only
-> list complete
-
-# List by tag
-> list --tag work
-> list --tag shopping
-
-# List by priority
-> list --priority high
-> list --priority medium
-```
-
-#### Searching Tasks
-```bash
-# Search by keyword
-> search meeting
-> search groceries
-> search project
-```
-
-#### Managing Tasks
-```bash
-# Mark task as complete (use first few characters of ID)
-> complete abc123
-
-# Mark task as incomplete
-> incomplete abc123
-
-# Update a task (interactive)
-> update abc123
-
-# Delete a task (with confirmation)
-> delete abc123
-```
-
-#### Utility Commands
-```bash
-# Show statistics
-> stats
-
-# Clear completed tasks
-> clear complete
-
-# Show help
-> help
-
-# Exit application
-> exit
-```
-
-### Example Session
-```bash
+```text
 $ poetry run python -m src.main
 
 ============================================================
@@ -195,263 +145,115 @@ All Tasks (2):
 
 Goodbye! 👋
 ```
-## Screenshots
 
-### Welcome Screen
-![Welcome Screen](screenshots/1-welcome.png)
+---
 
-### Adding a Task
-Adding a task with natural language parsing:
-![Add Task](screenshots/2-add-task.png)
+## 📂 Project Directory Structure
 
-### Listing Tasks
-View all your tasks at a glance:
-![List Tasks](screenshots/3-list-tasks.png)
-
-### Filtering by Tag
-Filter tasks by category:
-![Filter by Tag](screenshots/4-filter-tag.png)
-
-### Statistics Dashboard
-Track your productivity:
-![Statistics](screenshots/5-stats.png)
-
-### Help Menu
-Comprehensive command reference:
-![Help Menu](screenshots/6-help.png)
-
-### Search Functionality
-Quickly find tasks:
-![Search](screenshots/7-search.png)
-
-### Exit Application
-Exit the todo app:
-![Exit](screenshots/8-exit.png)
-
-
-
-## Project Structure
-```
+```text
 smart-todo-app/
 ├── src/
-│   ├── __init__.py
 │   ├── main.py              # Application entry point
+│   ├── cli/
+│   │   └── interface.py     # Command-line interface & output loop
 │   ├── models/
-│   │   ├── __init__.py
-│   │   ├── task.py          # Task data model
-│   │   └── todo_list.py     # TodoList collection manager
+│   │   ├── task.py         # Task data model & serialization logic
+│   │   └── todo_list.py    # TodoList collection manager & querying
 │   ├── parsers/
-│   │   ├── __init__.py
-│   │   ├── regex_patterns.py # Regex pattern definitions
-│   │   ├── task_parser.py    # Main task parser
-│   │   ├── date_parser.py    # Date parsing utilities
-│   │   └── validator.py      # Validation functions
-│   ├── services/
-│   │   ├── __init__.py
-│   │   ├── task_service.py   # High-level task operations
-│   │   └── storage_service.py # JSON persistence
-│   └── cli/
-│       ├── __init__.py
-│       └── interface.py      # Command-line interface
-├── tests/
-│   ├── __init__.py
-│   ├── test_task.py
-│   ├── test_todo_list.py
-│   ├── test_regex_patterns.py
-│   ├── test_task_parser.py
-│   ├── test_validator.py
-│   ├── test_date_parser.py
-│   ├── test_storage_service.py
-│   ├── test_task_service.py
-│   └── test_cli.py
-├── data/
-│   └── tasks.json           # Task storage (auto-generated)
+│   │   ├── date_parser.py   # Relative/offset due date parsing utilities
+│   │   ├── regex_patterns.py# Base patterns for NLP components
+│   │   ├── task_parser.py   # Token parsing coordinator
+│   │   └── validator.py     # Schema and field validator rules
+│   └── services/
+│       ├── storage_service.py # JSON persistence & backup manager
+│       └── task_service.py  # Orchestrates CLI requests to models/storage
+├── tests/                # Test suite covering parsers, service layers, and models
 ├── docs/
-│   └── architecture.md      # Architecture documentation
-├── pyproject.toml           # Poetry dependencies
-├── README.md
-├── .gitignore
-└── LICENSE
-└── PROJECT_REPORT.md
-└── Screenshot
+│   └── architecture.md     # Detailed architecture specifications
+├── data/
+│   └── tasks.json          # Target storage (auto-generated)
+├── pyproject.toml          # Poetry configuration & project dependencies
+└── LICENSE                 # Project License (MIT)
 ```
 
-## Supported Formats
+---
 
-### Tags
-- Format: `@tagname`
-- Examples: `@work`, `@shopping`, `@personal`, `@urgent`
-- Case insensitive
-- Alphanumeric with underscores
+## 🏗️ Architecture
 
-### Priority Levels
-- Format: `#level`
-- Levels: `#high`, `#medium`, `#low`
-- Case insensitive
+### Data Flow Pipeline
+```text
+┌────────────┐     ┌───────────────┐     ┌──────────────┐     ┌──────────┐     ┌─────────────────┐
+│ User Input │ ──> │ CLI Interface │ ──> │ Task Service │ ──> │ TodoList │ ──> │ Storage Service │
+└────────────┘     └───────────────┘     └──────────────┘     └──────────┘     └─────────────────┘
+                           │                                       │
+                           ▼                                       ▼
+                      Task Parser                             Task Model
+                           │
+                           ▼
+               [Validator, Date Parser, Regex]
+```
 
-### Due Dates
-- **Exact dates**: `due:2025-10-20` (YYYY-MM-DD)
-- **Relative dates**: 
-  - `due:today`
-  - `due:tomorrow`
-  - `due:yesterday`
-  - `due:next week`
-  - `due:next month`
-- **Offset dates**:
-  - `due:3 days`
-  - `due:2 weeks`
+---
 
-### Time
-- **24-hour format**: `at 14:00`, `by 9:30`
-- **12-hour format**: `at 3pm`, `by 5:30pm`, `at 11am`
-- Case insensitive
-
-### Email Assignment
-- Format: `assigned:email@example.com`
-- Full email validation
-- Case insensitive
-
-### Duration
-- Format: `1h`, `30m`, `1h30m`
-- Hours and/or minutes
-
-## Development
+## 🛠️ Development & Quality Assurance
 
 ### Running Tests
+This project is heavily tested to guarantee stability and prevent regressions.
+
 ```bash
 # Run all tests
 poetry run pytest
 
-# Run with coverage
+# Run tests with coverage reports
 poetry run pytest --cov=src tests/
 
-# Run specific test file
+# Run a specific test suite
 poetry run pytest tests/test_task_parser.py -v
-
-# Run with verbose output
-poetry run pytest -v
 ```
 
-### Code Quality
+### Code Quality & Standards
+We maintain high code quality with automated formatters and linters:
+
 ```bash
-# Format code
+# Auto-format codebase using Black
 poetry run black src/ tests/
 
-# Lint code
+# Lint with Flake8
 poetry run flake8 src/ tests/
 
-# Type checking
+# Run static type checks with Mypy
 poetry run mypy src/
 ```
 
-### Project Management
+---
 
-This project uses:
-- **Git Flow** with feature branches
-- **GitHub Issues** for task tracking
-- **GitHub Project Board** for workflow visualization
-- **Pull Requests** for code review
+## 🤝 Contributing & Conventions
 
-## Architecture
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/amazing-feature`.
+3. Commit changes according to convention: `git commit -m 'feat: add amazing feature'`.
+4. Push to the branch: `git push origin feature/amazing-feature`.
+5. Open a Pull Request.
 
-### Data Flow
-```
-User Input → CLI Interface → Task Service → TodoList → Storage Service
-                ↓                             ↓
-            Task Parser                   Task Model
-                ↓
-        [Validator, Date Parser, Regex Patterns]
-```
+### Commit Message Conventions
+*   `feat:` - Introduces a new feature.
+*   `fix:` - Resolves a bug.
+*   `docs:` - Modifies documentation.
+*   `test:` - Adds or updates test coverage.
+*   `refactor:` - Reworks code structure without changing behavior.
 
-### Key Components
+---
 
-1. **Task Model** (`src/models/task.py`)
-   - Represents a single task
-   - Handles task state and operations
-   - Supports serialization
+## 👤 Author
 
-2. **TodoList** (`src/models/todo_list.py`)
-   - Manages collection of tasks
-   - CRUD operations
-   - Filtering and searching
+**Fadeni Taiwo Henry**
+*   GitHub: [@Protagonist01](https://github.com/Protagonist01)
 
-3. **Task Parser** (`src/parsers/task_parser.py`)
-   - Parses natural language input
-   - Extracts metadata using regex
-   - Validates and sanitizes data
+---
 
-4. **Storage Service** (`src/services/storage_service.py`)
-   - JSON file persistence
-   - Auto-save functionality
-   - Backup/restore support
+## 💖 Acknowledgements
 
-5. **Task Service** (`src/services/task_service.py`)
-   - High-level API
-   - Combines TodoList + Storage
-   - Automatic persistence
-
-6. **CLI Interface** (`src/cli/interface.py`)
-   - Interactive command-line
-   - User-friendly output
-   - Error handling
-
-## Testing
-
-- **200+ Unit Tests** covering all modules
-- **>95% Code Coverage**
-- **Integration Tests** for end-to-end workflows
-- **Edge Case Testing** for robust error handling
-
-Test categories:
-- Model tests (Task, TodoList)
-- Parser tests (regex, validation, dates)
-- Service tests (storage, task operations)
-- CLI tests (command processing)
-
-## Contributing
-
-This is a course project for Data Epic Intermediate Cohort 4.
-
-### Development Workflow
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-### Commit Convention
-
-- `feat:` - New feature
-- `fix:` - Bug fix
-- `docs:` - Documentation changes
-- `test:` - Test additions/changes
-- `refactor:` - Code refactoring
-
-## License
-
-MIT License - See LICENSE file for details
-
-## Author
-
-Fadeni Taiwo Henry
-- GitHub: [Protagonist01](https://github.com/Protagonist01)
-
-## Acknowledgments
-
-- Data Epic Team for project guidance
-- Python community for amazing tools
-- All contributors and reviewers
-- Claude Anthropic
-
-## Project Timeline
-
-- **Week 1**: Core implementation
-- **Deadline**: October 17, 2025, 23:59
-
-## Links
-
-- Repository: https://github.com/Protagonist01/smart-todo-app
-- Organization Repo: https://github.com/Data-Epic/smart-todo-app
-- Issues: https://github.com/Protagonist01/smart-todo-app/issues
-- Pull Requests: https://github.com/Protagonist01/smart-todo-app/pulls
+*   **Data Epic Team** for project specifications and mentorship.
+*   The Python and Poetry open-source communities.
+*   Anthropic Claude for assisting in design and development.
